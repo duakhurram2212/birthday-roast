@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthdayyy ;)</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="left">
+                <div class="title">
+                    <h1 class="happy">
+                        <span style="--t:4s;">H</span>
+                        <span style="--t:4.2s;">a</span>
+                        <span style="--t:4.4s;">p</span>
+                        <span style="--t:4.6s;">p</span>
+                        <span style="--t:4.8s;">y</span>
+                    </h1>
+                    <h1 class="birthday">
+                        <span style="--t:5s;">B</span>
+                        <span style="--t:5.2s;">i</span>
+                        <span style="--t:5.4s;">r</span>
+                        <span style="--t:5.6s;">t</span>
+                        <span style="--t:5.8s;">h</span>
+                        <span style="--t:6s;">d</span>
+                        <span style="--t:6.2s;">a</span>
+                        <span style="--t:6.4s;">y</span>
+                    </h1>
+                    <div class="hat">
+                        <img src="./images/hat.png" alt="Birthday Hat" width="130">
+                    </div>
+                </div>
+
+                <div class="date__of__birth"><span></span></div>
+
+                <!-- Lets Go Button -->
+                <div class="lets__go">Let’s go!</div>
+            </div>
+
+            <div class="right">
+                <div class="box__account">
+                    <div class="image">
+                        <img src="./images/unnamed.png" alt="Profile">
+                    </div>
+                    <div class="name"><span>Human ;) </span></div>
+                    <div class="balloon_one">
+                        <img width="100px" src="./images/balloon1.png" alt="Balloon">
+                    </div>
+                    <div class="balloon_two">
+                        <img width="100px" src="./images/balloon2.png" alt="Balloon">
+                    </div>
+                </div>
+
+                <div class="cricle">
+                    <div class="text__cricle">
+                        <span style="--i:1;">h</span>
+                        <span style="--i:2;">a</span>
+                        <span style="--i:3;">p</span>
+                        <span style="--i:4;">p</span>
+                        <span style="--i:5;">y</span>
+                        <span style="--i:6;">-</span>
+                        <span style="--i:7;">b</span>
+                        <span style="--i:8;">i</span>
+                        <span style="--i:9;">r</span>
+                        <span style="--i:10;">t</span>
+                        <span style="--i:11;">h</span>
+                        <span style="--i:12;">d</span>
+                        <span style="--i:13;">a</span>
+                        <span style="--i:14;">y</span>
+                        <span style="--i:15;">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smiley Icon -->
+        <div class="smiley__icon">
+            <img src="./images/smiley_icon.png" alt="Smiley" width="100">
+        </div>
+
+        <!-- Overlay Screen -->
+        <div class="overlay__screen">
+            <div class="overlay__content">
+
+                <!-- Close Button -->
+                 <span class="close__overlay close-fixed">&times;</span>
+
+                <!-- Cake Scene -->
+                <div class="cake-scene">
+                    <h1 class="cake-title">🎂 Make a Wish Before Cutting! 🎉</h1>
+
+                    <!-- Cake Image -->
+                    <img src="./images/cake.jpeg" alt="Birthday Cake" class="cake-image">
+
+                    <!-- Cut Cake Button -->
+                    <button class="cut-cake-btn">✂ Cut the Cake!</button>
+
+                    <!-- Video (hidden initially) -->
+                    <video src="./images/cutcake.mp4" class="cutcake-video" autoplay controls style="display:none;"></video>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Animate DOB letters
+        const datetxt = "22 December";
+        const charArrDate = datetxt.split('');
+        let currentIndex = 0;
+        const date__of__birth = document.querySelector(".date__of__birth span");
+
+        setTimeout(() => {
+            const interval = setInterval(() => {
+                if (currentIndex < charArrDate.length) {
+                    date__of__birth.textContent += charArrDate[currentIndex];
+                    currentIndex++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }, 1000);
+
+        // Overlay open/close
+        const letsGo = document.querySelector('.lets__go');
+        const overlay = document.querySelector('.overlay__screen');
+        const closeOverlay = document.querySelector('.close__overlay');
+
+        letsGo.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+        });
+
+        closeOverlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            // Reset cake/video state
+            const cakeImage = document.querySelector('.cake-image');
+            const video = document.querySelector('.cutcake-video');
+            const cutBtn = document.querySelector('.cut-cake-btn');
+
+            video.pause();
+            video.currentTime = 0;
+            video.style.display = 'none';
+
+            cakeImage.style.display = 'block';
+            cutBtn.disabled = false;
+            cutBtn.textContent = "✂ Cut the Cake!";
+        });
+
+        // Cut Cake Button
+        const cutBtn = document.querySelector('.cut-cake-btn');
+        const cakeImage = document.querySelector('.cake-image');
+        const video = document.querySelector('.cutcake-video');
+
+        cutBtn.addEventListener('click', () => {
+            cakeImage.style.display = 'none';
+            video.style.display = 'block';
+            cutBtn.disabled = true;
+            cutBtn.textContent = "Enjoy the Cake! 🎉";
+
+            video.play();
+        });
+    </script>
+</body>
+
+</html>
